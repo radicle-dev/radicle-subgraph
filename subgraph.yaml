@@ -1,0 +1,26 @@
+specVersion: 0.0.2
+schema:
+  file: ./schema.graphql
+dataSources:
+  - name: OrgV1Factory
+    kind: ethereum/contract
+    network: ropsten
+    source:
+      address: "0xe30aA5594FFB52B6bF5bbB21eB7e71Ac525bB028"
+      abi: OrgV1Factory
+      startBlock: 9490500
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - OrgCreated
+      abis:
+        - name: OrgV1Factory
+          file: ./abis/OrgV1Factory.json
+        - name: OrgV1
+          file: ./abis/OrgV1.json
+      eventHandlers:
+        - event: OrgCreated(address)
+          handler: handleOrgCreated
+      file: ./src/mapping.ts
