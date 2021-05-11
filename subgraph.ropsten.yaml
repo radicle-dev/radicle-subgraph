@@ -6,9 +6,9 @@ dataSources:
     kind: ethereum/contract
     network: ropsten
     source:
-      address: "0xe30aA5594FFB52B6bF5bbB21eB7e71Ac525bB028"
+      address: "0x2007bcEf1247CD03Bb4262eF420D6487368f473B"
       abi: OrgV1Factory
-      startBlock: 9490500
+      startBlock: 10213923
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -21,6 +21,6 @@ dataSources:
         - name: OrgV1
           file: ./abis/OrgV1.json
       eventHandlers:
-        - event: OrgCreated(address)
+        - event: OrgCreated(address,address)
           handler: handleOrgCreated
       file: ./src/mapping.ts

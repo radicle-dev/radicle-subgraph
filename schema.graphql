@@ -1,11 +1,5 @@
 type Org @entity {
   id: ID!
-  owner: Safe
+  owner: Bytes!
   creator: Bytes!
-}
-
-type Safe @entity {
-  id: ID!
-  threshold: BigInt!
-  owners: [Bytes!]!
 }

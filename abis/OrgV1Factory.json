@@ -1,7 +1,18 @@
 [
   {
     "anonymous": false,
-    "inputs": [{ "type": "address", "name": "org", "indexed": false }],
+    "inputs": [
+      {
+        "type": "address",
+        "name": "org",
+        "indexed": false
+      },
+      {
+        "type": "address",
+        "name": "safe",
+        "indexed": false
+      }
+    ],
     "name": "OrgCreated",
     "type": "event"
   }

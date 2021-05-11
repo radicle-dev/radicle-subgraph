@@ -5,9 +5,8 @@ import { Org } from "../generated/schema"
 
 export function handleOrgCreated(event: OrgCreated): void {
   let entity = new Org(event.params.org.toHex())
-  let org = OrgV1.bind(event.params.org)
 
-  entity.owner = org.owner();
+  entity.owner = event.params.safe;
   entity.creator = event.transaction.from;
 
   // Write to store.

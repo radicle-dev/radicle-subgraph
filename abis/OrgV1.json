@@ -1,1 +1,17 @@
-[{"constant":true,"gas":null,"inputs":[],"name":"owner","outputs":[{"type":"address","name":""}],"payable":false,"stateMutability":"view","type":"function"}]
+[
+  {
+    "constant": true,
+    "gas": null,
+    "inputs": [],
+    "name": "owner",
+    "outputs": [
+      {
+        "type": "address",
+        "name": ""
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  }
+]
