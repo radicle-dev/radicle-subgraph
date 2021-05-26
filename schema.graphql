@@ -12,3 +12,10 @@ type Anchor @entity {
   stateHashFormat: Int!
   objectType: Int!
 }
+
+type Project @entity {
+  id: ID!
+  org: Org!
+  stateHash: Bytes!
+  stateHashFormat: Int!
+}
