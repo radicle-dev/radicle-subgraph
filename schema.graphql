@@ -3,3 +3,11 @@ type Org @entity {
   owner: Bytes!
   creator: Bytes!
 }
+
+type Anchor @entity {
+  id: ID!
+  objectId: Bytes!
+  stateHash: Bytes!
+  stateHashFormat: Int!
+  objectType: Int!
+}

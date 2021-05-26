@@ -14,7 +14,7 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - OrgCreated
+        - Org
       abis:
         - name: OrgV1Factory
           file: ./abis/OrgV1Factory.json
@@ -24,3 +24,25 @@ dataSources:
         - event: OrgCreated(address,address)
           handler: handleOrgCreated
       file: ./src/mapping.ts
+templates:
+  - name: OrgV1
+    kind: ethereum/contract
+    network: ropsten
+    source:
+      abi: OrgV1
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      file: ./src/org.ts
+      entities:
+        - Org
+        - Anchor
+      abis:
+        - name: OrgV1
+          file: ./abis/OrgV1.json
+      eventHandlers:
+        - event: Anchored(bytes32,bytes32,uint8,uint8)
+          handler: handleAnchored
+        - event: Unanchored(bytes32)
+          handler: handleUnanchored

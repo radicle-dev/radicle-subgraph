@@ -1,0 +1,15 @@
+import { OrgV1, Anchored, Unanchored } from "../generated/OrgV1Factory/OrgV1";
+import { Org, Anchor } from "../generated/schema";
+
+export function handleAnchored(event: Anchored): void {
+  let anchor = new Anchor(event.transaction.hash.toHex());
+
+  anchor.objectId = event.params.id;
+  anchor.stateHash = event.params.hash;
+  anchor.stateHashFormat = event.params.format;
+  anchor.objectType = event.params.kind;
+
+  anchor.save();
+}
+
+export function handleUnanchored(event: Unanchored): void {}

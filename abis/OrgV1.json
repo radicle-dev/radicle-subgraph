@@ -13,5 +13,44 @@
     "payable": false,
     "stateMutability": "view",
     "type": "function"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "type": "bytes32",
+        "name": "id",
+        "indexed": false
+      },
+      {
+        "type": "bytes32",
+        "name": "hash",
+        "indexed": false
+      },
+      {
+        "type": "uint8",
+        "name": "kind",
+        "indexed": false
+      },
+      {
+        "type": "uint8",
+        "name": "format",
+        "indexed": false
+      }
+    ],
+    "name": "Anchored",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "type": "bytes32",
+        "name": "id",
+        "indexed": false
+      }
+    ],
+    "name": "Unanchored",
+    "type": "event"
   }
 ]
