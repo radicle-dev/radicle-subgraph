@@ -38,6 +38,7 @@ templates:
       entities:
         - Org
         - Anchor
+        - Project
       abis:
         - name: OrgV1
           file: ./abis/OrgV1.json

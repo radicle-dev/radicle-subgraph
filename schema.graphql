@@ -6,11 +6,11 @@ type Org @entity {
 
 type Anchor @entity {
   id: ID!
-  orgAddress: Bytes!
+  org: Org!
   objectId: Bytes!
   stateHash: Bytes!
   stateHashFormat: Int!
-  objectType: Int!
+  stateType: Int!
 }
 
 type Project @entity {
