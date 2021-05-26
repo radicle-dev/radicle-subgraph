@@ -4,7 +4,7 @@ schema:
 dataSources:
   - name: OrgV1Factory
     kind: ethereum/contract
-    network: rinkeby
+    network: ropsten
     source:
       address: "0xe30aA5594FFB52B6bF5bbB21eB7e71Ac525bB028"
       abi: OrgV1Factory
@@ -14,9 +14,7 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - OrgCreated
-        - Anchored
-        - Unanchored
+        - Org
       abis:
         - name: OrgV1Factory
           file: ./abis/OrgV1Factory.json
@@ -26,3 +24,26 @@ dataSources:
         - event: OrgCreated(address,address)
           handler: handleOrgCreated
       file: ./src/mapping.ts
+templates:
+  - name: OrgV1
+    kind: ethereum/contract
+    network: ropsten
+    source:
+      abi: OrgV1
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      file: ./src/org.ts
+      entities:
+        - Org
+        - Anchor
+        - Project
+      abis:
+        - name: OrgV1
+          file: ./abis/OrgV1.json
+      eventHandlers:
+        - event: Anchored(bytes32,bytes32,uint8,uint8)
+          handler: handleAnchored
+        - event: Unanchored(bytes32)
+          handler: handleUnanchored
