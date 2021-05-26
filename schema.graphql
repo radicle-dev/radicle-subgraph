@@ -6,6 +6,7 @@ type Org @entity {
 
 type Anchor @entity {
   id: ID!
+  orgAddress: Bytes!
   objectId: Bytes!
   stateHash: Bytes!
   stateHashFormat: Int!
