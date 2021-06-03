@@ -11,11 +11,11 @@ type Anchor @entity {
   stateHash: Bytes!
   stateHashFormat: Int!
   stateType: Int!
+  timestamp: BigInt!
 }
 
 type Project @entity {
   id: ID!
   org: Org!
-  stateHash: Bytes!
-  stateHashFormat: Int!
+  anchor: Anchor!
 }
