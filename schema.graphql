@@ -17,5 +17,5 @@ type Anchor @entity {
 type Project @entity {
   id: ID!
   org: Org!
-  anchor: Anchor!
+  commitAnchor: Anchor!
 }
