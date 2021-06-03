@@ -10,14 +10,14 @@ export function handleAnchored(event: Anchored): void {
   anchor.stateHashFormat = event.params.format;
   anchor.stateType = event.params.kind;
   anchor.org = event.address.toHex();
+  anchor.timestamp = event.block.timestamp;
 
   anchor.save();
 
   if (event.params.kind === 0x0) { // Project commit anchor.
     let proj = new Project(event.params.id.toHex());
     proj.org = event.address.toHex();
-    proj.stateHash = anchor.stateHash;
-    proj.stateHashFormat = anchor.stateHashFormat;
+    proj.anchor = anchor.id;
     proj.save();
   }
 }
