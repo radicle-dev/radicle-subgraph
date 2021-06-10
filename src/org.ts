@@ -6,8 +6,7 @@ export function handleAnchored(event: Anchored): void {
   let anchor = new Anchor(event.transaction.hash.toHex());
 
   anchor.objectId = event.params.id;
-  anchor.stateHash = event.params.hash;
-  anchor.stateHashFormat = event.params.format;
+  anchor.stateMultihash = event.params.multihash;
   anchor.stateType = event.params.kind;
   anchor.org = event.address.toHex();
   anchor.timestamp = event.block.timestamp;

@@ -6,9 +6,9 @@ dataSources:
     kind: ethereum/contract
     network: rinkeby
     source:
-      address: "0xe30aA5594FFB52B6bF5bbB21eB7e71Ac525bB028"
+      address: "0x57962Eb188146A4942c44545a97478d64dc9e4A5"
       abi: OrgV1Factory
-      startBlock: 8566667
+      startBlock: 8738827
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -43,7 +43,7 @@ templates:
         - name: OrgV1
           file: ./abis/OrgV1.json
       eventHandlers:
-        - event: Anchored(bytes32,bytes32,uint8,uint8)
+        - event: Anchored(bytes32,bytes,uint8)
           handler: handleAnchored
         - event: Unanchored(bytes32)
           handler: handleUnanchored
