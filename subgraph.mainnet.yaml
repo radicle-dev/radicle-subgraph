@@ -1,0 +1,49 @@
+specVersion: 0.0.2
+schema:
+  file: ./schema.graphql
+dataSources:
+  - name: OrgV1Factory
+    kind: ethereum/contract
+    network: mainnet
+    source:
+      address: "0x7c4D590168A9019995e072f9c1eCfc1fc356bEd4"
+      abi: OrgV1Factory
+      startBlock: 12607495
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Org
+      abis:
+        - name: OrgV1Factory
+          file: ./abis/OrgV1Factory.json
+        - name: OrgV1
+          file: ./abis/OrgV1.json
+      eventHandlers:
+        - event: OrgCreated(address,address)
+          handler: handleOrgCreated
+      file: ./src/mapping.ts
+templates:
+  - name: OrgV1
+    kind: ethereum/contract
+    network: mainnet
+    source:
+      abi: OrgV1
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      file: ./src/org.ts
+      entities:
+        - Org
+        - Anchor
+        - Project
+      abis:
+        - name: OrgV1
+          file: ./abis/OrgV1.json
+      eventHandlers:
+        - event: Anchored(bytes32,bytes,uint8)
+          handler: handleAnchored
+        - event: Unanchored(bytes32)
+          handler: handleUnanchored
