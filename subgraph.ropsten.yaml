@@ -6,9 +6,9 @@ dataSources:
     kind: ethereum/contract
     network: ropsten
     source:
-      address: "0xc074cDd9541960B0AA72D90c8bC642F6ae9C4032"
+      address: "0xf36fbaB8BA78683D23c5021bfcE8A5c88731200F"
       abi: OrgV1Factory
-      startBlock: 10409983
+      startBlock: 10449694
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -43,7 +43,7 @@ templates:
         - name: OrgV1
           file: ./abis/OrgV1.json
       eventHandlers:
-        - event: Anchored(bytes32,bytes,uint8)
+        - event: Anchored(bytes32,uint32,bytes)
           handler: handleAnchored
         - event: Unanchored(bytes32)
           handler: handleUnanchored

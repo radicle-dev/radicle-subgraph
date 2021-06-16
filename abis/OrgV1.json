@@ -23,13 +23,13 @@
         "indexed": false
       },
       {
-        "type": "bytes",
-        "name": "multihash",
+        "type": "uint32",
+        "name": "tag",
         "indexed": false
       },
       {
-        "type": "uint8",
-        "name": "kind",
+        "type": "bytes",
+        "name": "multihash",
         "indexed": false
       }
     ],

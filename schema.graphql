@@ -8,8 +8,8 @@ type Anchor @entity {
   id: ID!
   org: Org!
   objectId: Bytes!
-  stateMultihash: Bytes!
-  stateType: Int!
+  tag: BigInt!
+  multihash: Bytes!
   timestamp: BigInt!
 }
 

@@ -6,14 +6,14 @@ export function handleAnchored(event: Anchored): void {
   let anchor = new Anchor(event.transaction.hash.toHex());
 
   anchor.objectId = event.params.id;
-  anchor.stateMultihash = event.params.multihash;
-  anchor.stateType = event.params.kind;
+  anchor.multihash = event.params.multihash;
+  anchor.tag = event.params.tag;
   anchor.org = event.address.toHex();
   anchor.timestamp = event.block.timestamp;
 
   anchor.save();
 
-  if (event.params.kind === 0x0) { // Project commit anchor.
+  if (event.params.tag.isZero()) { // Project commit anchor.
     let proj = new Project(event.params.id.toHex());
     proj.org = event.address.toHex();
     proj.anchor = anchor.id;

@@ -6,9 +6,9 @@ dataSources:
     kind: ethereum/contract
     network: mainnet
     source:
-      address: "0x7c4D590168A9019995e072f9c1eCfc1fc356bEd4"
+      address: "0xa15bEb4876F20018b6b4A4116B7560c5fcC9336e"
       abi: OrgV1Factory
-      startBlock: 12607495
+      startBlock: 12645849
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -43,7 +43,7 @@ templates:
         - name: OrgV1
           file: ./abis/OrgV1.json
       eventHandlers:
-        - event: Anchored(bytes32,bytes,uint8)
+        - event: Anchored(bytes32,uint32,bytes)
           handler: handleAnchored
         - event: Unanchored(bytes32)
           handler: handleUnanchored
