@@ -8,6 +8,7 @@ export function handleOrgCreated(event: OrgCreated): void {
 
   entity.owner = event.params.safe;
   entity.creator = event.transaction.from;
+  entity.timestamp = event.block.timestamp;
 
   // Create the Org data-source.
   OrgV1.create(event.params.org);
