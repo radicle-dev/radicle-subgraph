@@ -2,6 +2,7 @@ type Org @entity {
   id: ID!
   owner: Bytes!
   creator: Bytes!
+  timestamp: BigInt!
 }
 
 type Anchor @entity {
