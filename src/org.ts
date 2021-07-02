@@ -1,6 +1,6 @@
 import { OrgV1, Anchored, Unanchored } from "../generated/OrgV1Factory/OrgV1";
 import { Org, Anchor, Project } from "../generated/schema";
-import { Address, crypto } from "@graphprotocol/graph-ts";
+import { Address, store, crypto } from "@graphprotocol/graph-ts";
 import { concat } from "@graphprotocol/graph-ts/helper-functions";
 
 export function handleAnchored(event: Anchored): void {
@@ -11,7 +11,6 @@ export function handleAnchored(event: Anchored): void {
   anchor.tag = event.params.tag;
   anchor.org = event.address.toHex();
   anchor.timestamp = event.block.timestamp;
-
   anchor.save();
 
   // Project commit anchor.
@@ -27,4 +26,9 @@ export function handleAnchored(event: Anchored): void {
   }
 }
 
-export function handleUnanchored(event: Unanchored): void {}
+export function handleUnanchored(event: Unanchored): void {
+  let id = event.params.id.toHex();
+  store.remove('Project', id);
+
+  // Note that we are keeping all anchors as historical events.
+}
