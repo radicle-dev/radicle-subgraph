@@ -1,6 +1,7 @@
 import { OrgV1, Anchored, Unanchored } from "../generated/OrgV1Factory/OrgV1";
 import { Org, Anchor, Project } from "../generated/schema";
-import { Address } from '@graphprotocol/graph-ts'
+import { Address, crypto } from "@graphprotocol/graph-ts";
+import { concat } from "@graphprotocol/graph-ts/helper-functions";
 
 export function handleAnchored(event: Anchored): void {
   let anchor = new Anchor(event.transaction.hash.toHex());
@@ -13,8 +14,13 @@ export function handleAnchored(event: Anchored): void {
 
   anchor.save();
 
-  if (event.params.tag.isZero()) { // Project commit anchor.
-    let proj = new Project(event.params.id.toHex());
+  // Project commit anchor.
+  if (event.params.tag.isZero()) {
+    let proj = new Project(
+      // Keyed by Project ID and Org ID because an anchored project can exist
+      // in multiple orgs.
+      crypto.keccak256(concat(event.params.id, event.address)).toHex()
+    );
     proj.org = event.address.toHex();
     proj.anchor = anchor.id;
     proj.save();
