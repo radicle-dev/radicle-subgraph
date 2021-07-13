@@ -11,6 +11,7 @@ export function handleAnchored(event: Anchored): void {
   anchor.tag = event.params.tag;
   anchor.org = event.address.toHex();
   anchor.timestamp = event.block.timestamp;
+  anchor.blockNumber = event.block.number;
   anchor.save();
 
   // Project commit anchor.
@@ -22,6 +23,7 @@ export function handleAnchored(event: Anchored): void {
     );
     proj.org = event.address.toHex();
     proj.anchor = anchor.id;
+    proj.timestamp = anchor.timestamp;
     proj.save();
   }
 }

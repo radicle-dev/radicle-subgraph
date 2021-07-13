@@ -12,10 +12,12 @@ type Anchor @entity {
   tag: BigInt!
   multihash: Bytes!
   timestamp: BigInt!
+  blockNumber: BigInt!
 }
 
 type Project @entity {
   id: ID!
   org: Org!
+  timestamp: BigInt!
   anchor: Anchor!
 }
