@@ -1,18 +1,17 @@
 {
-  "name": "radicle-orgs-subgraph",
+  "name": "radicle-subgraph",
   "license": "UNLICENSED",
   "scripts": {
     "codegen": "graph codegen",
     "build": "graph build",
     "deploy:rinkeby": "graph deploy --network rinkeby --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ radicle-dev/radicle-orgs-rinkeby subgraph.rinkeby.yaml",
-    "deploy:ropsten": "graph deploy --network ropsten --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ radicle-dev/radicle-orgs-ropsten subgraph.ropsten.yaml",
     "deploy:mainnet": "graph deploy --network mainnet --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ radicle-dev/radicle-orgs subgraph.mainnet.yaml",
     "create-local": "graph create --node http://localhost:8020/ radicle-dev/radicle-orgs-subgraph",
     "remove-local": "graph remove --node http://localhost:8020/ radicle-dev/radicle-orgs-subgraph",
     "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 radicle-dev/radicle-orgs-subgraph"
   },
   "dependencies": {
-    "@graphprotocol/graph-cli": "0.20.0",
-    "@graphprotocol/graph-ts": "0.20.0"
+    "@graphprotocol/graph-cli": "0.21.0",
+    "@graphprotocol/graph-ts": "0.20.1"
   }
 }
