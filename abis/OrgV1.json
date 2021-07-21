@@ -18,6 +18,18 @@
     "anonymous": false,
     "inputs": [
       {
+        "type": "address",
+        "name": "newOwner",
+        "indexed": false
+      }
+    ],
+    "name": "OwnerChanged",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
         "type": "bytes32",
         "name": "id",
         "indexed": false

@@ -47,3 +47,5 @@ templates:
           handler: handleAnchored
         - event: Unanchored(bytes32)
           handler: handleUnanchored
+        - event: OwnerChanged(address)
+          handler: handleOwnerChanged

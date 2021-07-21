@@ -1,4 +1,4 @@
-import { OrgV1, Anchored, Unanchored } from "../generated/OrgV1Factory/OrgV1";
+import { OrgV1, Anchored, Unanchored, OwnerChanged } from "../generated/OrgV1Factory/OrgV1";
 import { Org, Anchor, Project } from "../generated/schema";
 import { Address, store, crypto } from "@graphprotocol/graph-ts";
 import { concat } from "@graphprotocol/graph-ts/helper-functions";
@@ -33,4 +33,10 @@ export function handleUnanchored(event: Unanchored): void {
   store.remove('Project', id);
 
   // Note that we are keeping all anchors as historical events.
+}
+
+export function handleOwnerChanged(event: OwnerChanged): void {
+  let org = Org.load(event.address.toHex());
+  org.owner = event.params.newOwner;
+  org.save();
 }
