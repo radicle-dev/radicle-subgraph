@@ -1,7 +1,9 @@
-import { OrgV1, Anchored, Unanchored, OwnerChanged } from "../generated/OrgV1Factory/OrgV1";
-import { Org, Anchor, Project } from "../generated/schema";
-import { Address, store, crypto } from "@graphprotocol/graph-ts";
+import { Anchored, Unanchored, OwnerChanged } from "../generated/OrgV1Factory/OrgV1";
+import { Org, Anchor, Project, Safe } from "../generated/schema";
+import { store, crypto, Bytes } from "@graphprotocol/graph-ts";
+import { GnosisSafe as GnosisSafeContract } from '../generated/templates';
 import { concat } from "@graphprotocol/graph-ts/helper-functions";
+import { GnosisSafe } from "../generated/templates/GnosisSafe/GnosisSafe";
 
 export function handleAnchored(event: Anchored): void {
   let anchor = new Anchor(event.transaction.hash.toHex());
@@ -29,14 +31,43 @@ export function handleAnchored(event: Anchored): void {
 }
 
 export function handleUnanchored(event: Unanchored): void {
-  let id = event.params.id.toHex();
-  store.remove('Project', id);
+  store.remove('Project', 
+    crypto.keccak256(concat(event.params.id, event.address)).toHex()
+  );
 
   // Note that we are keeping all anchors as historical events.
 }
 
 export function handleOwnerChanged(event: OwnerChanged): void {
+  // Load Org and if not available or same owner, return early
   let org = Org.load(event.address.toHex());
+  if (org === null || org.owner === event.params.newOwner) {
+    return;
+  }
+
+  // Try to load Safe, if found remove it from storage.
+  let currentSafe = Safe.load(org.owner.toHex());
+  if (currentSafe !== null) {
+    org.safe = null;
+    store.remove("Safe", org.owner.toHex());
+  }
+
+  // Check if it's a safe and if so create it.
+  let safeInstance = GnosisSafe.bind(event.params.newOwner);
+  let callGetOwnerResult = safeInstance.try_getOwners();
+  if (!callGetOwnerResult.reverted) {
+    let safe = new Safe(event.params.newOwner.toHex());
+    //@ts-expect-error The function changetype gets injected by the graph-cli
+    safe.owners = changetype<Bytes[]>(callGetOwnerResult.value);
+    safe.threshold = safeInstance.getThreshold();
+    org.safe = event.params.newOwner.toHex();
+
+    GnosisSafeContract.create(event.params.newOwner);
+    safe.save();
+  }
+
   org.owner = event.params.newOwner;
   org.save();
 }
+
+

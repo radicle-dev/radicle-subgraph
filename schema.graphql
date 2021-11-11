@@ -1,6 +1,7 @@
 type Org @entity {
   id: ID!
   owner: Bytes!
+  safe: Safe
   creator: Bytes!
   timestamp: BigInt!
 }
@@ -20,4 +21,10 @@ type Project @entity {
   org: Org!
   timestamp: BigInt!
   anchor: Anchor!
+}
+
+type Safe @entity {
+  id: ID!
+  owners: [Bytes!]!
+  threshold: BigInt!
 }

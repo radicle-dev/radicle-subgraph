@@ -11,7 +11,7 @@ dataSources:
       startBlock: 8774325
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.4
+      apiVersion: 0.0.5
       language: wasm/assemblyscript
       entities:
         - Org
@@ -20,6 +20,8 @@ dataSources:
           file: ./abis/OrgV1Factory.json
         - name: OrgV1
           file: ./abis/OrgV1.json
+        - name: GnosisSafe
+          file: ./abis/GnosisSafe.json
       eventHandlers:
         - event: OrgCreated(address,address)
           handler: handleOrgCreated
@@ -32,7 +34,7 @@ templates:
       abi: OrgV1
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.4
+      apiVersion: 0.0.5
       language: wasm/assemblyscript
       file: ./src/org.ts
       entities:
@@ -42,6 +44,8 @@ templates:
       abis:
         - name: OrgV1
           file: ./abis/OrgV1.json
+        - name: GnosisSafe
+          file: ./abis/GnosisSafe.json
       eventHandlers:
         - event: Anchored(bytes32,uint32,bytes)
           handler: handleAnchored
@@ -49,3 +53,25 @@ templates:
           handler: handleUnanchored
         - event: OwnerChanged(address)
           handler: handleOwnerChanged
+  - name: GnosisSafe
+    kind: ethereum/contract
+    network: rinkeby
+    source:
+      abi: GnosisSafe
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      entities:
+        - Safe 
+      language: wasm/assemblyscript
+      file: ./src/safe.ts
+      abis:
+        - name: GnosisSafe
+          file: ./abis/GnosisSafe.json
+      eventHandlers:
+        - event: AddedOwner(address)
+          handler: handleAddedOwner
+        - event: RemovedOwner(address)
+          handler: handleRemovedOwner
+        - event: ChangedThreshold(uint256)
+          handler: handleChangedThreshold
